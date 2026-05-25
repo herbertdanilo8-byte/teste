@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seu Delivery – Rápido, Quente e na Sua Porta</title>
+<link rel="stylesheet" href="site-css/site.css">
+<link rel="stylesheet" href="site-css/hero-carousel.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;900&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+ 
+
+<style>
+nav {
+  transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease !important;
+}
+nav.nav-scrolled {
+  height: 52px !important;
+  background: rgba(10,10,10,0.99) !important;
+  box-shadow: 0 4px 32px rgba(224,28,28,0.55) !important;
+  border-bottom: 2px solid #e01c1c !important;
+}
+nav.nav-scrolled #logo-img {
+  width: 36px !important;
+  height: 36px !important;
+}
+nav.nav-scrolled .nav-logo-text {
+  font-size: 1rem !important;
+}
+</style>
+
+<style id="perf-fixes">
+/* ── PERFORMANCE: pausar animações em repouso ── */
+.bev-orb::after,
+.bev-orb::before,
+.sc-orb::after,
+.sc-orb::before {
+  animation-play-state: paused;
+}
+.bev-card:hover .bev-orb::after,
+.bev-card:hover .bev-orb::before,
+.sprite-card:hover .sc-orb::after,
+.sprite-card:hover .sc-orb::before {
+  animation-play-state: running;
+}
+.bev-scan::after,
+.sc-scan::after {
+  animation-play-state: paused;
+}
+.bev-card:hover .bev-scan::after,
+.sprite-card:hover .sc-scan::after {
+  animation-play-state: running;
+}
+.bev-spark-1, .bev-spark-2,
+.sc-spark-1, .sc-spark-2, .sc-spark-3 {
+  animation-play-state: paused;
+}
+.bev-card:hover .bev-spark-1,
+.bev-card:hover .bev-spark-2,
+.sprite-card:hover .sc-spark-1,
+.sprite-card:hover .sc-spark-2,
+.sprite-card:hover .sc-spark-3 {
+  animation-play-state: running;
+}
+
+/* ── Lazy-load de vídeos inativos ── */
+.hc-video[data-lazy] { display: none; }
+/* ── MOBILE: desabilitar :hover CSS nos bev-card (usa .bev-open via JS) ── */
+@media (hover: none) and (max-width: 700px) {
+  .bev-card:hover {
+    width: calc(100vw - 32px) !important;
+    height: 120px !important;
+    border-color: rgba(var(--bev-rgb), .18) !important;
+    background: rgba(var(--bev-rgb), .05) !important;
+    box-shadow: none !important;
+  }
+  .bev-card:hover .bev-orb { width: 80px !important; height: 80px !important; }
+  .bev-card:hover .bev-orb-wrap { left: 20% !important; translate: -50% -50% !important; }
+  .bev-card:hover .bev-info { opacity: 0 !important; }
+  .bev-card:hover .bev-logo { opacity: 1 !important; }
+  .bev-card:hover::before { opacity: 0 !important; }
+  .bev-card:hover .bev-scan { opacity: 0 !important; }
+  .bev-card:hover .bev-corner { opacity: 0 !important; }
+}
+
+</style>
+
+</head>
+<body>
+
+
+<!-- BANNER DE DEMONSTRAÇÃO -->
+<div id="demo-banner" style="
+  position:fixed; top:0; left:0; right:0; z-index:9999;
+  background:linear-gradient(90deg,#1a1a2e,#16213e,#0f3460);
+  border-bottom:2px solid #f5a800;
+  padding:8px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  font-family:'Montserrat',sans-serif; font-size:0.72rem;
+  color:rgba(255,255,255,0.85);
+  box-shadow:0 2px 20px rgba(0,0,0,0.5);
+">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span style="
+      background:#f5a800; color:#111; font-weight:800;
+      font-size:0.6rem; letter-spacing:1.5px; text-transform:uppercase;
+      padding:3px 8px; border-radius:4px;
+    ">DEMONSTRAÇÃO</span>
+    <span style="color:rgba(255,255,255,0.6);">
+      Este é um site de exemplo — os textos, nome e contato são fictícios e serão personalizados para você.
+    </span>
+  </div>
+  <button onclick="document.getElementById('demo-banner').style.display='none'" style="
+    background:none; border:1px solid rgba(255,255,255,0.2);
+    color:rgba(255,255,255,0.5); padding:3px 10px; border-radius:20px;
+    cursor:pointer; font-size:0.65rem; letter-spacing:1px;
+    transition:all 0.2s;
+  " onmouseover="this.style.borderColor='#f5a800';this.style.color='#f5a800'"
+     onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='rgba(255,255,255,0.5)'">
+    FECHAR ✕
+  </button>
+</div>
+<div id="demo-spacer" style="height:41px;"></div>
+
+<!-- NAV -->\
+<nav>
+  <!--<a href="#inicio" class="nav-logo">
+    <img src="" alt="Seu Delivery" id="logo-img">
+    <span class="nav-logo-text"> <span>seu nome</span></span>
+  </a>-->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#inicio">Início</a></li>
+    <li><a href="#cardapio">Cardápio</a></li>
+    <li><a href="#sobre">Sobre Nós</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="nav-cart-btn" onclick="openCart()">
+      <i class="fas fa-shopping-bag"></i> Carrinho
+      <span class="cart-badge" id="cart-badge">0</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO VIDEO -->
+<!-- ===== HERO CAROUSEL ===== -->
+<section id="inicio" class="hero-section">
+
+  <div class="hc-track" id="hcTrack">
+
+    <!-- SLIDE 1 – HAMBÚRGUER -->
+    <div class="hc-slide" data-index="0">
+      <div class="hc-bg">
+        <video class="hc-video" muted playsinline loop preload="metadata">
+          <source src="videos/anburgue.mp4" type="video/mp4">
+        </video>
+        <div class="hc-bg-img" style="background-image:url('https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+      </div>
+      <div class="hc-overlay"></div>
+      <div class="hc-content">
+        <span class="hc-tag">🔥 Destaque do Dia</span>
+        <h1 class="hc-title">BURGUER <span>DUPLO</span><br>NA BRASA</h1>
+        <p class="hc-desc">Carne artesanal, queijo cheddar derretido e bacon crocante. Pão brioche tostado na hora.</p>
+        <div class="hc-meta">
+          <div class="hc-meta-item"><i class="fas fa-fire"></i> Artesanal</div>
+          <div class="hc-meta-item"><i class="fas fa-star"></i> Mais Pedido</div>
+          <div class="hc-meta-item"><i class="fas fa-motorcycle"></i> 30–40 min</div>
+        </div>
+        <div class="hc-price-row">
+          <span class="hc-price">R$ 29,90</span>
+          <a href="#cardapio" class="hc-btn">Ver Cardápio <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 – SANDUÍCHE -->
+    <div class="hc-slide" data-index="1">
+      <div class="hc-bg">
+        <video class="hc-video" muted playsinline loop preload="none">
+          <source src="videos/Ele_caindo_se_montando_202605171923 - Trim.mp4" type="video/mp4">
+        </video>
+        <div class="hc-bg-img" style="background-image:url('https://images.pexels.com/photos/2282532/pexels-photo-2282532.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+      </div>
+      <div class="hc-overlay" style="background:linear-gradient(105deg,rgba(0,0,0,0.65) 30%,rgba(0,0,0,0.05) 100%)"></div>
+      <div class="hc-content">
+        <span class="hc-tag" style="background:var(--red)">🥪 Especial da Casa</span>
+        <h1 class="hc-title">SANDUÍCHE <span>ESPECIAL</span><br>GRELHADO</h1>
+        <p class="hc-desc">Frango grelhado suculento, queijo prato derretido e o molho exclusivo da casa.</p>
+        <div class="hc-meta">
+          <div class="hc-meta-item"><i class="fas fa-leaf"></i> Proteína</div>
+          <div class="hc-meta-item"><i class="fas fa-heart"></i> Saudável</div>
+          <div class="hc-meta-item"><i class="fas fa-motorcycle"></i> 25–35 min</div>
+        </div>
+        <div class="hc-price-row">
+          <span class="hc-price">R$ 24,90</span>
+          <a href="#cardapio" class="hc-btn" style="background:var(--red)">Ver Cardápio <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 – SUCO -->
+    <div class="hc-slide" data-index="2">
+      <div class="hc-bg">
+        <video class="hc-video" muted playsinline loop preload="none">
+          <source src="videos/laranja.mp4" type="video/mp4">
+        </video>
+        <div class="hc-bg-img" style="background-image:url('https://images.pexels.com/photos/1346347/pexels-photo-1346347.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+      </div>
+      <div class="hc-overlay" style="background:linear-gradient(105deg,rgba(0,0,0,0.65) 30%,rgba(0,0,0,0.05) 100%)"></div>
+      <div class="hc-content">
+        <span class="hc-tag" style="background:#f5a800;color:#111">🍊 Refrescante</span>
+        <h1 class="hc-title">SUCO <span>TROPICAL</span><br>NATURAL</h1>
+        <p class="hc-desc">Suco natural gelado com frutas frescas. Laranja, maracujá, acerola ou limão. Feito na hora!</p>
+        <div class="hc-meta">
+          <div class="hc-meta-item"><i class="fas fa-seedling"></i> 100% Natural</div>
+          <div class="hc-meta-item"><i class="fas fa-snowflake"></i> Gelado</div>
+          <div class="hc-meta-item"><i class="fas fa-motorcycle"></i> 20–30 min</div>
+        </div>
+        <div class="hc-price-row">
+          <span class="hc-price" style="color:var(--yellow)">R$ 12,90</span>
+          <a href="#cardapio" class="hc-btn" style="background:#e07a00;box-shadow:0 4px 20px rgba(224,122,0,0.5)">Ver Cardápio <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="hc-arrow hc-arrow--prev" id="hcPrev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+  <button class="hc-arrow hc-arrow--next" id="hcNext" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
+
+  <!-- MINIATURAS DE SELEÇÃO -->
+  <div class="hc-thumbs" id="hcDots">
+    <button class="hc-thumb active" data-slide="0">
+      <img src="https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Hambúrguer">
+      <span>Hambúrguer</span>
+    </button>
+    <button class="hc-thumb" data-slide="1">
+      <img src="https://images.pexels.com/photos/2282532/pexels-photo-2282532.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Sanduíche">
+      <span>Sanduíche</span>
+    </button>
+    <button class="hc-thumb" data-slide="2">
+      <img src="https://images.pexels.com/photos/1346347/pexels-photo-1346347.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Suco">
+      <span>Suco</span>
+    </button>
+  </div>
+
+  <div class="hc-progress-bar"><div class="hc-progress-fill" id="hcProgressFill"></div></div>
+
+</section>
+
+<!-- BEBIDAS EM DESTAQUE -->
+<section id="bebidas-destaque" style="background:var(--black);padding:60px 16px 70px;">
+
+<style>
+/* ══════════════════════════════════
+   BEBIDAS CARDS – estilos globais
+══════════════════════════════════ */
+.bev-header {
+  text-align:center; margin-bottom:44px;
+}
+.bev-header h2 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  color:#f0f0f0; letter-spacing:.08em;
+}
+.bev-header h2 span { color:var(--yellow,#f5a800); }
+.bev-header p {
+  font-size:.78rem; color:rgba(240,240,240,.4);
+  margin-top:6px; letter-spacing:.12em; text-transform:uppercase;
+}
+
+.bev-row {
+  display:flex; gap:28px;
+  justify-content:center; align-items:center;
+  flex-wrap:wrap;
+}
+
+/* card base */
+.bev-card {
+  position:relative;
+  width:200px; height:400px;
+  border-radius:28px; cursor:pointer;
+  transition:width .75s cubic-bezier(.16,1,.3,1),
+             box-shadow .5s ease,
+             background .5s ease,
+             border-color .5s ease;
+  transform-style:preserve-3d;
+  background:transparent;
+  border:1px solid transparent;
+  overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.bev-card:hover {
+  width:560px;
+  border-color:rgba(var(--bev-rgb),.15);
+  background:linear-gradient(145deg,rgba(var(--bev-rgb),.08) 0%,#080c0a 55%,rgba(var(--bev-rgb),.04) 100%);
+  box-shadow:0 0 0 1px rgba(var(--bev-rgb),.25),
+             0 0 80px rgba(var(--bev-rgb),.12),
+             0 50px 120px rgba(0,0,0,.8),
+             inset 0 1px 0 rgba(255,255,255,.05);
+}
+.bev-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(130deg,rgba(255,255,255,.03) 0%,transparent 45%);
+  border-radius:inherit; pointer-events:none; z-index:20;
+  opacity:0; transition:opacity .5s ease;
+}
+.bev-card:hover::before { opacity:1; }
+
+/* scan */
+.bev-scan {
+  position:absolute; inset:0; border-radius:inherit;
+  background:repeating-linear-gradient(180deg,transparent 0px,transparent 3px,rgba(var(--bev-rgb),.015) 3px,rgba(var(--bev-rgb),.015) 4px);
+  pointer-events:none; z-index:18; opacity:0; transition:opacity .4s ease;
+}
+.bev-card:hover .bev-scan { opacity:1; }
+.bev-scan::after {
+  content:''; position:absolute; left:0; right:0; height:60px; top:-60px;
+  background:linear-gradient(180deg,transparent,rgba(var(--bev-rgb),.05),transparent);
+  animation:bev-sweep 3s ease-in-out infinite;
+}
+@keyframes bev-sweep { from{top:-60px} to{top:calc(100% + 60px)} }
+
+/* corners */
+.bev-corner { position:absolute; width:14px; height:14px; z-index:19; opacity:0; transition:opacity .3s ease .35s; }
+.bev-corner::before,.bev-corner::after {
+  content:''; position:absolute;
+  background:rgb(var(--bev-rgb)); border-radius:1px;
+}
+.bev-corner::before { width:100%; height:1.5px; top:0; }
+.bev-corner::after  { width:1.5px; height:100%; left:0; }
+.bev-c-tl { top:14px; left:14px; }
+.bev-c-tr { top:14px; right:14px; transform:scaleX(-1); }
+.bev-c-bl { bottom:14px; left:14px; transform:scaleY(-1); }
+.bev-c-br { bottom:14px; right:14px; transform:scale(-1); }
+.bev-card:hover .bev-corner { opacity:.7; }
+
+/* sparks */
+.bev-spark {
+  position:absolute; z-index:19; opacity:0; pointer-events:none;
+  transition:opacity .35s ease;
+  font-size:9px; letter-spacing:.15em;
+  color:rgb(var(--bev-rgb));
+  text-shadow:0 0 8px rgba(var(--bev-rgb),.7);
+  white-space:nowrap; text-transform:uppercase;
+  font-family:'Space Mono',monospace;
+}
+.bev-card:hover .bev-spark { opacity:1; }
+.bev-spark-1 { top:20px; left:22px; transition-delay:.5s; animation:bev-float 3.2s ease-in-out infinite .2s; }
+.bev-spark-2 { bottom:22px; left:18px; transition-delay:.6s; animation:bev-float 3.8s ease-in-out infinite .7s; }
+@keyframes bev-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+/* orb */
+.bev-orb-wrap {
+  position:absolute; left:50%; top:50%; translate:-50% -50%; z-index:10;
+  transition:left .75s cubic-bezier(.16,1,.3,1),translate .75s cubic-bezier(.16,1,.3,1);
+}
+.bev-card:hover .bev-orb-wrap { left:22%; translate:-50% -50%; }
+
+.bev-orb {
+  width:120px; height:120px; border-radius:50%;
+  border:none;
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  transition:width .75s cubic-bezier(.16,1,.3,1),
+             height .75s cubic-bezier(.16,1,.3,1);
+  background:none;
+  box-shadow:none;
+  overflow:visible;
+}
+.bev-card:hover .bev-orb {
+  width:320px; height:320px;
+  box-shadow:none;
+}
+.bev-orb::after  { display:none; }
+.bev-orb::before { display:none; }
+@keyframes bev-spin  { to{transform:rotate(360deg)} }
+@keyframes bev-pulse { 0%,100%{opacity:.12;transform:scale(1)} 50%{opacity:.5;transform:scale(1.07)} }
+
+/* logo repouso */
+.bev-logo {
+  position:absolute; inset:0; border-radius:50%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; z-index:3;
+  transition:opacity .4s ease;
+}
+.bev-card:hover .bev-logo { opacity:0; pointer-events:none; }
+.bev-logo img { width:100%; height:100%; object-fit:cover; border-radius:50%; filter:drop-shadow(0 0 10px rgba(var(--bev-rgb),.4)); }
+
+/* lata hover */
+.bev-can {
+  position:absolute; inset:0; border-radius:50%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; z-index:2;
+}
+.bev-can img { width:700%; height:700%; object-fit:contain; transition:transform .4s cubic-bezier(.16,1,.3,1); }
+.bev-card:hover .bev-can img { transform:scale(1.08) rotate(-4deg); }
+
+/* info */
+.bev-info {
+  position:absolute;
+  left:50%; top:50%; translate:0 -50%;
+  width:220px; z-index:15;
+  display:flex; flex-direction:column; gap:9px;
+  opacity:0; pointer-events:none;
+  transform:translateX(20px);
+  transition:opacity .4s ease .3s,transform .4s ease .3s;
+}
+.bev-card:hover .bev-info { opacity:1; pointer-events:auto; transform:translateX(0); }
+.bev-tag {
+  font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:rgb(var(--bev-rgb)); opacity:.8;
+}
+.bev-stars { display:flex; align-items:center; gap:6px; }
+.bev-stars span { color:#f5a800; font-size:11px; }
+.bev-stars em  { font-size:9px; color:rgba(240,240,240,.45); font-style:normal; }
+.bev-name {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:38px; line-height:1; letter-spacing:.03em; color:#f0f0f0;
+}
+.bev-name span { color:rgb(var(--bev-rgb)); text-shadow:0 0 20px rgba(var(--bev-rgb),.5); }
+.bev-desc { font-size:11px; line-height:1.6; color:rgba(240,240,240,.6); }
+.bev-price {
+  font-family:'Bebas Neue',sans-serif; font-size:30px;
+  color:rgb(var(--bev-rgb)); letter-spacing:.05em;
+  text-shadow:0 0 16px rgba(var(--bev-rgb),.35);
+}
+.bev-btn {
+  position:relative; overflow:hidden;
+  padding:10px 20px; width:fit-content;
+  border:1px solid rgba(var(--bev-rgb),.4); border-radius:9px;
+  background:rgba(var(--bev-rgb),.08); color:rgb(var(--bev-rgb));
+  font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  cursor:pointer; font-family:'Space Mono',monospace;
+  transition:background .3s,box-shadow .3s,transform .12s;
+}
+.bev-btn:hover {
+  background:rgba(var(--bev-rgb),.18);
+  border-color:rgba(var(--bev-rgb),.7);
+  box-shadow:0 0 22px rgba(var(--bev-rgb),.3);
+}
+.bev-btn:active { transform:scale(.96); }
+
+/* tilt */
+.bev-card.bev-tilting {
+  transition:width .75s cubic-bezier(.16,1,.3,1),box-shadow .5s ease;
+}
+
+/* ── MOBILE: layout vertical com tap ── */
+@media(max-width:700px){
+  /* Row vira coluna */
+  .bev-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Card ocupa largura total, altura fixa menor */
+  .bev-card {
+    width: calc(100vw - 32px) !important;
+    max-width: 400px;
+    height: 120px !important;
+    border-radius: 20px;
+    flex-direction: row;
+    justify-content: flex-start;
+    transition: height .55s cubic-bezier(.16,1,.3,1),
+                box-shadow .4s ease,
+                background .4s ease,
+                border-color .4s ease;
+    border: 1px solid rgba(var(--bev-rgb), .18);
+    background: rgba(var(--bev-rgb), .05);
+  }
+
+  /* Estado expandido no mobile via classe JS */
+  .bev-card.bev-open {
+    height: 340px !important;
+    border-color: rgba(var(--bev-rgb), .35);
+    background: linear-gradient(145deg, rgba(var(--bev-rgb),.1) 0%, #080c0a 60%);
+    box-shadow: 0 0 0 1px rgba(var(--bev-rgb),.25),
+                0 0 40px rgba(var(--bev-rgb),.12),
+                0 20px 60px rgba(0,0,0,.6);
+  }
+
+  /* Orb fica à esquerda e menor */
+  .bev-orb-wrap {
+    left: 20% !important;
+    translate: -50% -50% !important;
+    transition: left .55s cubic-bezier(.16,1,.3,1);
+  }
+  .bev-card.bev-open .bev-orb-wrap {
+    left: 22% !important;
+    translate: -50% -50% !important;
+  }
+
+  .bev-orb {
+    width: 80px !important;
+    height: 80px !important;
+    transition: width .55s cubic-bezier(.16,1,.3,1),
+                height .55s cubic-bezier(.16,1,.3,1),
+                box-shadow .4s ease;
+  }
+  .bev-card.bev-open .bev-orb {
+    width: 200px !important;
+    height: 200px !important;
+  }
+
+  /* Info aparece só quando aberto */
+  .bev-info {
+    left: 42% !important;
+    width: 54% !important;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(16px);
+    transition: opacity .35s ease .2s, transform .35s ease .2s;
+  }
+  .bev-card.bev-open .bev-info {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  .bev-name { font-size: 26px; }
+  .bev-price { font-size: 22px; }
+  .bev-desc { font-size: 10px; }
+
+  /* Logo visível no estado fechado */
+  .bev-card:not(.bev-open) .bev-logo { opacity: 1 !important; pointer-events: auto !important; }
+  .bev-card.bev-open .bev-logo { opacity: 0 !important; pointer-events: none !important; }
+
+  /* Label no card fechado (nome da bebida à direita do orb) */
+  .bev-card-label {
+    position: absolute;
+    left: 42%;
+    top: 50%;
+    translate: 0 -50%;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: #f0f0f0;
+    letter-spacing: .05em;
+    pointer-events: none;
+    transition: opacity .25s ease;
+    z-index: 15;
+  }
+  .bev-card.bev-open .bev-card-label { opacity: 0; }
+
+  /* Ícone de tap */
+  .bev-tap-hint {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    translate: 0 -50%;
+    font-size: 18px;
+    opacity: .45;
+    transition: opacity .25s;
+    pointer-events: none;
+    z-index: 16;
+  }
+  .bev-card.bev-open .bev-tap-hint { opacity: 0; }
+
+  /* Ocultar hover no desktop quando em mobile */
+  .bev-card:hover:not(.bev-open) { width: calc(100vw - 32px) !important; height: 120px !important; }
+
+  /* Scan e sparks só no aberto */
+  .bev-scan, .bev-spark-1, .bev-spark-2 { display: none; }
+  .bev-card.bev-open .bev-scan,
+  .bev-card.bev-open .bev-spark-1,
+  .bev-card.bev-open .bev-spark-2 { display: block; }
+
+  /* Corners */
+  .bev-corner { display: none; }
+  .bev-card.bev-open .bev-corner { display: block; }
+}
+</style>
+
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="bev-header">
+      <h2>Bebidas em <span>Destaque</span></h2>
+      <p>Geladas e prontas pra entregar · Passe o mouse para ver</p>
+    </div>
+
+    <div class="bev-row">
+
+      <!-- ══ COCA-COLA ══ -->
+      <div class="bev-card" id="bevCoca" style="--bev-rgb:220,30,30;">
+        <div class="bev-scan"></div>
+        <div class="bev-corner bev-c-tl"></div><div class="bev-corner bev-c-tr"></div>
+        <div class="bev-corner bev-c-bl"></div><div class="bev-corner bev-c-br"></div>
+        <div class="bev-spark bev-spark-1">↯ ORIGINAL</div>
+        <div class="bev-spark bev-spark-2">◈ CLÁSSICO</div>
+        <div class="bev-orb-wrap">
+          <div class="bev-orb">
+            <div class="bev-logo">
+              <img src="IMG/COCA-COLA.jpg" alt="Coca-Cola">
+            </div>
+            <div class="bev-can">
+              <img src="IMG/coca.png" alt="Lata Coca-Cola" style="width:75%;height:auto;object-fit:contain;filter:drop-shadow(0 6px 24px rgba(220,30,30,.6));">
+            </div>
+          </div>
+        </div>
+        <div class="bev-info">
+          <span class="bev-tag">🥤 Sabor Original</span>
+          <div class="bev-stars"><span>★★★★★</span><em>(38.2k avaliações)</em></div>
+          <div class="bev-name">Coca<br><span>Cola</span></div>
+          <p class="bev-desc">O sabor mais amado do mundo. Refrescante, gaseificada e sempre gelada.<br><em style="font-size:10px;opacity:.6">Gaseificada · 350mL</em></p>
+          <div class="bev-price">R$0,00</div>
+          <button class="bev-btn">⚡ Adicionar ao Pedido</button>
+        </div>
+      </div>
+
+      <!-- ══ SPRITE ══ -->
+      <div class="bev-card" id="bevSprite" style="--bev-rgb:0,200,100;">
+        <div class="bev-scan"></div>
+        <div class="bev-corner bev-c-tl"></div><div class="bev-corner bev-c-tr"></div>
+        <div class="bev-corner bev-c-bl"></div><div class="bev-corner bev-c-br"></div>
+        <div class="bev-spark bev-spark-1">↯ REFRESH</div>
+        <div class="bev-spark bev-spark-2">◈ ZERO SUGAR</div>
+        <div class="bev-orb-wrap">
+          <div class="bev-orb">
+            <div class="bev-logo">
+              <img src="IMG/SPLITE.jpg" alt="Sprite">
+            </div>
+            <div class="bev-can">
+              <img src="IMG/sprite.png" alt="Lata Sprite" style="width:75%;height:auto;object-fit:contain;filter:drop-shadow(0 6px 24px rgba(0,200,100,.6));">
+            </div>
+          </div>
+        </div>
+        <div class="bev-info">
+          <span class="bev-tag">🌿 Sabor Limão · </span>
+          <div class="bev-stars"><span>★★★★★</span><em>(12.4k avaliações)</em></div>
+          <div class="bev-name">Sprite<br><span>Zero</span></div>
+          <p class="bev-desc">Refrescância intensa com sabor limão sem arrependimento.<br><em style="font-size:10px;opacity:.6">Gaseificada · Sem calorias · 600mL</em></p>
+          <div class="bev-price"><R10></R10>0,00</div>
+          <button class="bev-btn">⚡ Adicionar ao Pedido</button>
+        </div>
+      </div>
+
+      <!-- ══ FANTA ══ -->
+      <div class="bev-card" id="bevFanta" style="--bev-rgb:255,140,0;">
+        <div class="bev-scan"></div>
+        <div class="bev-corner bev-c-tl"></div><div class="bev-corner bev-c-tr"></div>
+        <div class="bev-corner bev-c-bl"></div><div class="bev-corner bev-c-br"></div>
+        <div class="bev-spark bev-spark-1">↯ LARANJA</div>
+        <div class="bev-spark bev-spark-2">◈ TROPICAL</div>
+        <div class="bev-orb-wrap">
+          <div class="bev-orb">
+            <div class="bev-logo">
+              <img src="IMG/FANTA.jpg" alt="Fanta">
+            </div>
+            <div class="bev-can">
+              <img src="IMG/fanta.png" alt="Lata Fanta" style="width:75%;height:auto;object-fit:contain;filter:drop-shadow(0 6px 24px rgba(255,140,0,.6));">
+            </div>
+          </div>
+        </div>
+        <div class="bev-info">
+          <span class="bev-tag">🍊 Sabor Laranja · </span>
+          <div class="bev-stars"><span>★★★★★</span><em>(21.7k avaliações)</em></div>
+          <div class="bev-name">Fanta<br><span>Laranja</span></div>
+          <p class="bev-desc">O sabor tropical que todo mundo ama. Doce, gaseificada e super refrescante.<br><em style="font-size:10px;opacity:.6">Gaseificada · 350mL</em></p>
+          <div class="bev-price">R$0,00</div>
+          <button class="bev-btn">⚡ Adicionar ao Pedido</button>
+        </div>
+      </div>
+
+    </div><!-- /bev-row -->
+  </div><!-- /max-width -->
+
+  <script>
+  (function(){
+    var isMobile = window.matchMedia('(max-width:700px)').matches;
+
+    // Adicionar label e hint de tap nos cards (para mobile)
+    var labels = {
+      'bevCoca':   '',
+      'bevSprite': '',
+      'bevFanta':  ''
+    };
+
+    document.querySelectorAll('.bev-card').forEach(function(card){
+      // Inserir label do nome (visível no mobile fechado)
+      var lbl = document.createElement('div');
+      lbl.className = 'bev-card-label';
+      lbl.textContent = labels[card.id] || '';
+      card.appendChild(lbl);
+
+      // Inserir ícone de tap
+      var hint = document.createElement('div');
+      hint.className = 'bev-tap-hint';
+      hint.textContent = '';
+      card.appendChild(hint);
+
+      // ── MOBILE: tap para abrir/fechar ──
+      card.addEventListener('click', function(e){
+        if (!window.matchMedia('(max-width:700px)').matches) return;
+        var isOpen = card.classList.contains('bev-open');
+        // Fechar todos os outros
+        document.querySelectorAll('.bev-card').forEach(function(c){
+          c.classList.remove('bev-open');
+          c.style.transform = '';
+          c.classList.remove('bev-tilting');
+        });
+        if (!isOpen) card.classList.add('bev-open');
+      });
+
+      // ── DESKTOP: tilt com mouse ──
+      var hov = false;
+      card.addEventListener('mouseenter', function(){
+        if (window.matchMedia('(max-width:700px)').matches) return;
+        hov = true;
+      });
+      card.addEventListener('mouseleave', function(){
+        hov = false;
+        card.style.transform = '';
+        card.classList.remove('bev-tilting');
+      });
+      card.addEventListener('mousemove', function(e){
+        if(!hov || window.matchMedia('(max-width:700px)').matches) return;
+        var r = card.getBoundingClientRect();
+        var dx = (e.clientX - r.left - r.width/2) / (r.width/2);
+        var dy = (e.clientY - r.top  - r.height/2) / (r.height/2);
+        card.classList.add('bev-tilting');
+        card.style.transform = 'rotateX(' + (-dy*4) + 'deg) rotateY(' + (dx*4) + 'deg)';
+      });
+    });
+
+    // Fechar ao tocar fora
+    document.addEventListener('click', function(e){
+      if (!window.matchMedia('(max-width:700px)').matches) return;
+      if (!e.target.closest('.bev-card')) {
+        document.querySelectorAll('.bev-card').forEach(function(c){
+          c.classList.remove('bev-open');
+        });
+      }
+    });
+  })();
+  </script>
+
+</section>
+
+<div class="flame-strip"></div>
+
+<!-- GRADIENT FADE: hero → cardapio -->
+<div style="height:80px;background:linear-gradient(to bottom,var(--black),var(--black-soft));margin-top:-1px;pointer-events:none;"></div>
+
+<!-- SEARCH -->
+<div class="search-bar-wrap">
+  <div class="search-bar">
+    <i class="fas fa-search"></i>
+    <input type="text" id="search-input" placeholder="Buscar burguer, pizza, bebida..." oninput="filterProducts()">
+  </div>
+</div>
+
+<!-- CARDÁPIO -->
+<section id="cardapio">
+  <div class="section-title">Nosso <span>Cardápio</span></div>
+  <div class="divider"></div>
+  <p class="section-sub">Feito com ingredientes frescos e muito amor. Peça agora e receba quentinho! 🔥</p>
+
+  <div class="category-chips" id="chips">
+    <div class="chip active" onclick="filterCat('todos',this)"><i class="fas fa-th"></i> Todos</div>
+    <div class="chip" onclick="filterCat('burguer',this)"><i class="fas fa-hamburger"></i> Burguers</div>
+    <div class="chip" onclick="filterCat('pizza',this)"><i class="fas fa-pizza-slice"></i> Pizzas</div>
+    <div class="chip" onclick="filterCat('frango',this)"><i class="fas fa-drumstick-bite"></i> Frango</div>
+    <div class="chip" onclick="filterCat('bebida',this)"><i class="fas fa-glass-cheers"></i> Bebidas</div>
+    <div class="chip" onclick="filterCat('sobremesa',this)"><i class="fas fa-ice-cream"></i> Sobremesas</div>
+    <div class="chip" onclick="filterCat('combo',this)"><i class="fas fa-box-open"></i> Combos</div>
+  </div>
+
+  <div class="product-grid" id="product-grid"></div>
+</section>
+
+<!-- SPRITE CARD SECTION -->
+<section id="sprite-promo" style="background:var(--black);padding:60px 0;display:flex;justify-content:center;align-items:center;">
+
+<style>
+/* ── SPRITE CARD ── */
+.sprite-scene { perspective:1400px; position:relative; z-index:2; }
+
+.sprite-card {
+  position:relative;
+  width:220px; height:420px;
+  border-radius:32px; cursor:pointer;
+  transition:width .75s cubic-bezier(.16,1,.3,1),box-shadow .5s ease,background .5s ease,border-color .5s ease;
+  transform-style:preserve-3d; will-change:width,transform;
+  background:transparent;
+  border:1px solid transparent;
+  overflow:hidden; display:flex; align-items:center; justify-content:center;
+}
+.sprite-card:hover {
+  width:700px;
+  background:linear-gradient(145deg,#0f1e14 0%,#080c0a 55%,#0a1610 100%);
+  border-color:rgba(0,255,136,.12);
+  box-shadow:0 0 0 1px rgba(0,255,136,.2),0 0 80px rgba(0,255,136,.1),0 50px 120px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.sprite-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(130deg,rgba(255,255,255,.03) 0%,transparent 45%);
+  border-radius:inherit; pointer-events:none; z-index:20;
+  opacity:0; transition:opacity .5s ease;
+}
+.sprite-card:hover::before { opacity:1; }
+
+/* scan lines */
+.sc-scan {
+  position:absolute; inset:0; border-radius:inherit;
+  background:repeating-linear-gradient(180deg,transparent 0px,transparent 3px,rgba(0,255,136,.012) 3px,rgba(0,255,136,.012) 4px);
+  pointer-events:none; z-index:18; opacity:0; transition:opacity .4s ease;
+}
+.sprite-card:hover .sc-scan { opacity:1; }
+.sc-scan::after {
+  content:''; position:absolute; left:0; right:0; height:60px; top:-60px;
+  background:linear-gradient(180deg,transparent,rgba(0,255,136,.04),transparent);
+  animation:sc-sweep 3s ease-in-out infinite;
+}
+@keyframes sc-sweep { from{top:-60px} to{top:calc(100% + 60px)} }
+
+/* corners */
+.sc-corner { position:absolute; width:16px; height:16px; z-index:19; opacity:0; transition:opacity .3s ease .35s; }
+.sc-corner::before,.sc-corner::after { content:''; position:absolute; background:#00ff88; border-radius:1px; }
+.sc-corner::before { width:100%; height:1.5px; top:0; }
+.sc-corner::after  { width:1.5px; height:100%; left:0; }
+.sc-c-tl { top:16px; left:16px; }
+.sc-c-tr { top:16px; right:16px; transform:scaleX(-1); }
+.sc-c-bl { bottom:16px; left:16px; transform:scaleY(-1); }
+.sc-c-br { bottom:16px; right:16px; transform:scale(-1); }
+.sprite-card:hover .sc-corner { opacity:.6; }
+
+/* sparks */
+.sc-spark { position:absolute; z-index:19; opacity:0; pointer-events:none; transition:opacity .35s ease; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.15em; color:#00ff88; text-shadow:0 0 8px rgba(0,255,136,.7); white-space:nowrap; text-transform:uppercase; }
+.sprite-card:hover .sc-spark { opacity:1; }
+.sc-spark-1 { top:20px; left:24px; transition-delay:.5s; animation:sc-float 3.2s ease-in-out infinite .2s; }
+.sc-spark-2 { bottom:24px; left:20px; transition-delay:.6s; animation:sc-float 3.8s ease-in-out infinite .7s; }
+.sc-spark-3 { top:50%; left:16px; translate:0 -50%; transition-delay:.55s; animation:sc-float 2.9s ease-in-out infinite 1.1s; }
+@keyframes sc-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+/* orb */
+.sc-orb-wrap {
+  position:absolute; left:50%; top:50%; translate:-50% -50%; z-index:10;
+  transition:left .75s cubic-bezier(.16,1,.3,1),translate .75s cubic-bezier(.16,1,.3,1);
+}
+.sprite-card:hover .sc-orb-wrap { left:24%; translate:-50% -50%; }
+
+.sc-orb {
+  width:130px; height:130px; border-radius:50%;
+  border:none;
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  transition:width .75s cubic-bezier(.16,1,.3,1),height .75s cubic-bezier(.16,1,.3,1);
+  background:none;
+  box-shadow:none;
+  overflow:visible;
+}
+.sprite-card:hover .sc-orb {
+  width:290px; height:290px;
+  box-shadow:none;
+}
+.sc-orb::after  { display:none; }
+.sc-orb::before { display:none; }
+@keyframes sc-spin  { to{transform:rotate(360deg)} }
+@keyframes sc-pulse { 0%,100%{opacity:.12;transform:scale(1)} 50%{opacity:.45;transform:scale(1.07)} }
+
+/* logo no orb (repouso) */
+.sc-orb-logo {
+  position:absolute; inset:0; border-radius:50%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; z-index:3;
+  transition:opacity .4s ease;
+}
+.sprite-card:hover .sc-orb-logo { opacity:0; pointer-events:none; }
+.sc-orb-logo img { width:80%; height:80%; object-fit:contain; filter:drop-shadow(0 0 12px rgba(0,255,136,.4)); }
+
+/* lata no orb expandido */
+.sc-orb-bottle {
+  position:absolute; inset:0; border-radius:50%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; z-index:2;
+}
+.sc-orb-bottle img { width:75%; height:75%; object-fit:contain; }
+
+/* info panel */
+.sc-info {
+  position:absolute;
+  left:53%; top:50%; translate:0 -50%;
+  width:200px; z-index:15;
+  display:flex; flex-direction:column; gap:10px;
+  opacity:0; pointer-events:none;
+  transform:translateX(20px);
+  transition:opacity .4s ease .3s, transform .4s ease .3s;
+}
+.sprite-card:hover .sc-info { opacity:1; pointer-events:auto; transform:translateX(0); }
+
+.sc-info-tag {
+  font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:#00ff88; opacity:.7;
+}
+.sc-star-row { display:flex; align-items:center; gap:6px; }
+.sc-star-row span { color:#f5a800; font-size:11px; }
+.sc-star-row em { font-size:9px; color:rgba(240,255,248,.45); font-style:normal; }
+.sc-info-name {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:42px; line-height:1; letter-spacing:.03em;
+  color:#f0fff8;
+}
+.sc-info-name span { color:#00ff88; text-shadow:0 0 20px rgba(0,255,136,.5); }
+.sc-info-desc { font-size:11px; line-height:1.6; color:rgba(240,255,248,.6); }
+.sc-flavor-dots { display:flex; align-items:center; gap:7px; }
+.sc-flavor-dot {
+  width:10px; height:10px; border-radius:50%;
+  background:rgba(0,255,136,.18); border:1.5px solid rgba(0,255,136,.3);
+  cursor:pointer; transition:background .2s,border-color .2s,transform .2s;
+}
+.sc-flavor-dot.active { background:#00ff88; border-color:#00ff88; transform:scale(1.25); box-shadow:0 0 8px rgba(0,255,136,.6); }
+.sc-flavor-label { font-size:9px; color:rgba(240,255,248,.35); letter-spacing:.1em; text-transform:uppercase; }
+.sc-price { font-family:'Bebas Neue',sans-serif; font-size:32px; color:#00ff88; letter-spacing:.05em; text-shadow:0 0 20px rgba(0,255,136,.3); }
+.sc-btn-buy {
+  position:relative; overflow:hidden;
+  padding:11px 22px; width:fit-content;
+  border:1px solid rgba(0,255,136,.38); border-radius:9px;
+  background:rgba(0,255,136,.07); color:#00ff88;
+  font-family:'Space Mono',monospace;
+  font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  cursor:pointer; transition:background .3s,box-shadow .3s,transform .12s;
+}
+.sc-btn-buy:hover { background:rgba(0,255,136,.14); border-color:rgba(0,255,136,.65); box-shadow:0 0 24px rgba(0,255,136,.28); }
+.sc-btn-buy:active { transform:scale(.96); }
+
+/* título da seção */
+.sc-section-header {
+  text-align:center; margin-bottom:32px;
+}
+.sc-section-header h2 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  color:#f0f0f0; letter-spacing:.08em;
+}
+.sc-section-header h2 span { color:#00ff88; }
+.sc-section-header p {
+  font-size:.8rem; color:rgba(240,240,240,.45);
+  margin-top:6px; letter-spacing:.1em; text-transform:uppercase;
+}
+
+/* tilt */
+.sprite-card.sc-tilting { transition:width .75s cubic-bezier(.16,1,.3,1),box-shadow .5s ease; }
+
+@media(max-width:600px){
+  .sprite-card{ width:160px; height:360px; }
+  .sprite-card:hover{ width:calc(100vw - 32px); }
+  .sc-info{ left:46%; width:155px; }
+  .sc-info-name{ font-size:30px; }
+}
+</style>
+
+  
+         
+  <script>
+  // tilt 3D
+  (function(){
+    const card = document.getElementById('spriteCard');
+    let hov = false;
+    card.addEventListener('mouseenter',()=>hov=true);
+    card.addEventListener('mouseleave',()=>{hov=false;card.style.transform='';card.classList.remove('sc-tilting');});
+    card.addEventListener('mousemove',e=>{
+      if(!hov) return;
+      const r=card.getBoundingClientRect();
+      const dx=(e.clientX-r.left-r.width/2)/(r.width/2);
+      const dy=(e.clientY-r.top-r.height/2)/(r.height/2);
+      card.classList.add('sc-tilting');
+      card.style.transform=`rotateX(${-dy*5}deg) rotateY(${dx*5}deg)`;
+    });
+  })();
+  function scFlavor(el){
+    document.querySelectorAll('.sc-flavor-dot').forEach(d=>d.classList.remove('active'));
+    el.classList.add('active');
+  }
+  </script>
+</section>
+
+<div class="flame-strip"></div>
+<!-- GRADIENT FADE: cardapio → sobre -->
+<div style="height:80px;background:linear-gradient(to bottom,var(--black-soft),var(--black));pointer-events:none;"></div>
+
+<!-- SOBRE NÓS -->
+<section id="sobre">
+  <div class="section-title">Sobre <span>Nós</span></div>
+  <div class="divider"></div>
+  <div class="sobre-grid">
+    <div class="sobre-img-wrap">
+      <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=700&q=80" alt="Seu Delivery" style="width:100%;display:block;aspect-ratio:4/3;object-fit:cover">
+    </div>
+    <div class="sobre-text">
+      <p>A <strong style="color:var(--yellow)">Seu Delivery</strong> nasceu da paixão por comida de qualidade e pelo desejo de levar sabor à porta de cada cliente com agilidade e carinho. Começamos pequenos, com um motoboy e muita vontade, e hoje somos referência em delivery na região.</p>
+      <p>Nossa missão é simples: <em>entregar não apenas comida, mas uma experiência</em>. Cada pedido é preparado na hora, com ingredientes frescos, e entregue rapidamente para que você aproveite quentinho e gostoso.</p>
+      <p>Funcionamos até a <strong style="color:var(--red)">01h da madrugada</strong>, porque sabemos que a fome não tem horário. Contamos com atendimento humanizado via WhatsApp e equipe dedicada a deixar você satisfeito.</p>
+      <div class="sobre-stats">
+        <div class="stat-box">
+          <span class="stat-num">5K+</span>
+          <span class="stat-label">Clientes</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">30K+</span>
+          <span class="stat-label">Pedidos</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">4.9★</span>
+          <span class="stat-label">Avaliação</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADIENT FADE: sobre → faq -->
+<div style="height:80px;background:linear-gradient(to bottom,var(--black),var(--black-soft));pointer-events:none;"></div>
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-title"><span>Dúvidas</span> Frequentes</div>
+  <div class="divider"></div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Qual é o horário de funcionamento? <i class="fas fa-chevron-down"></i></button>
+      <div class="faq-a">Funcionamos todos os dias, das <strong>11h até 01h da madrugada</strong>. Nunca deixamos você na mão!</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Qual o tempo de entrega? <i class="fas fa-chevron-down"></i></button>
+      <div class="faq-a">O tempo médio de entrega é de <strong>30 a 50 minutos</strong>, dependendo da distância e do volume de pedidos. Você será informado via WhatsApp.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Quais formas de pagamento são aceitas? <i class="fas fa-chevron-down"></i></button>
+      <div class="faq-a">Aceitamos <strong>PIX, dinheiro, cartão de débito e crédito</strong> (na entrega). Para pagamento via PIX, você receberá os dados após confirmar o pedido.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Tem taxa de entrega? <i class="fas fa-chevron-down"></i></button>
+      <div class="faq-a">A taxa de entrega varia de acordo com a distância. Pedidos <strong>acima de R$ 50,00</strong> têm frete grátis dentro do raio de cobertura.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Como faço meu pedido? <i class="fas fa-chevron-down"></i></button>
+      <div class="faq-a">Adicione os itens ao carrinho aqui no site e finalize informando seus dados. Seu pedido será enviado automaticamente para nosso WhatsApp. Simples assim!</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Tem área mínima de pedido? <i class="fas fa-chevron-down"></i></button>
+      <div class="faq-a">Sim, o pedido mínimo é de <strong>R$ 20,00</strong>. Para combos e promoções especiais, confira nosso cardápio.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPRITE CARD SECTION -->
+<section id="sprite-promo" style="background:var(--black);padding:60px 0;display:flex;justify-content:center;align-items:center;">
+
+<style>
+/* ── SPRITE CARD ── */
+.sprite-scene { perspective:1400px; position:relative; z-index:2; }
+
+.sprite-card {
+  position:relative;
+  width:220px; height:420px;
+  border-radius:32px; cursor:pointer;
+  transition:width .75s cubic-bezier(.16,1,.3,1),box-shadow .5s ease,background .5s ease,border-color .5s ease;
+  transform-style:preserve-3d; will-change:width,transform;
+  background:transparent;
+  border:1px solid transparent;
+  overflow:hidden; display:flex; align-items:center; justify-content:center;
+}
+.sprite-card:hover {
+  width:700px;
+  background:linear-gradient(145deg,#0f1e14 0%,#080c0a 55%,#0a1610 100%);
+  border-color:rgba(0,255,136,.12);
+  box-shadow:0 0 0 1px rgba(0,255,136,.2),0 0 80px rgba(0,255,136,.1),0 50px 120px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.sprite-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(130deg,rgba(255,255,255,.03) 0%,transparent 45%);
+  border-radius:inherit; pointer-events:none; z-index:20;
+  opacity:0; transition:opacity .5s ease;
+}
+.sprite-card:hover::before { opacity:1; }
+
+/* scan lines */
+.sc-scan {
+  position:absolute; inset:0; border-radius:inherit;
+  background:repeating-linear-gradient(180deg,transparent 0px,transparent 3px,rgba(0,255,136,.012) 3px,rgba(0,255,136,.012) 4px);
+  pointer-events:none; z-index:18; opacity:0; transition:opacity .4s ease;
+}
+.sprite-card:hover .sc-scan { opacity:1; }
+.sc-scan::after {
+  content:''; position:absolute; left:0; right:0; height:60px; top:-60px;
+  background:linear-gradient(180deg,transparent,rgba(0,255,136,.04),transparent);
+  animation:sc-sweep 3s ease-in-out infinite;
+}
+@keyframes sc-sweep { from{top:-60px} to{top:calc(100% + 60px)} }
+
+/* corners */
+.sc-corner { position:absolute; width:16px; height:16px; z-index:19; opacity:0; transition:opacity .3s ease .35s; }
+.sc-corner::before,.sc-corner::after { content:''; position:absolute; background:#00ff88; border-radius:1px; }
+.sc-corner::before { width:100%; height:1.5px; top:0; }
+.sc-corner::after  { width:1.5px; height:100%; left:0; }
+.sc-c-tl { top:16px; left:16px; }
+.sc-c-tr { top:16px; right:16px; transform:scaleX(-1); }
+.sc-c-bl { bottom:16px; left:16px; transform:scaleY(-1); }
+.sc-c-br { bottom:16px; right:16px; transform:scale(-1); }
+.sprite-card:hover .sc-corner { opacity:.6; }
+
+/* sparks */
+.sc-spark { position:absolute; z-index:19; opacity:0; pointer-events:none; transition:opacity .35s ease; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.15em; color:#00ff88; text-shadow:0 0 8px rgba(0,255,136,.7); white-space:nowrap; text-transform:uppercase; }
+.sprite-card:hover .sc-spark { opacity:1; }
+.sc-spark-1 { top:20px; left:24px; transition-delay:.5s; animation:sc-float 3.2s ease-in-out infinite .2s; }
+.sc-spark-2 { bottom:24px; left:20px; transition-delay:.6s; animation:sc-float 3.8s ease-in-out infinite .7s; }
+.sc-spark-3 { top:50%; left:16px; translate:0 -50%; transition-delay:.55s; animation:sc-float 2.9s ease-in-out infinite 1.1s; }
+@keyframes sc-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+/* orb */
+.sc-orb-wrap {
+  position:absolute; left:50%; top:50%; translate:-50% -50%; z-index:10;
+  transition:left .75s cubic-bezier(.16,1,.3,1),translate .75s cubic-bezier(.16,1,.3,1);
+}
+.sprite-card:hover .sc-orb-wrap { left:24%; translate:-50% -50%; }
+
+.sc-orb {
+  width:130px; height:130px; border-radius:50%;
+  border:none;
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  transition:width .75s cubic-bezier(.16,1,.3,1),height .75s cubic-bezier(.16,1,.3,1);
+  background:none;
+  box-shadow:none;
+  overflow:visible;
+}
+.sprite-card:hover .sc-orb {
+  width:290px; height:290px;
+  box-shadow:none;
+}
+.sc-orb::after  { display:none; }
+.sc-orb::before { display:none; }
+@keyframes sc-spin  { to{transform:rotate(360deg)} }
+@keyframes sc-pulse { 0%,100%{opacity:.12;transform:scale(1)} 50%{opacity:.45;transform:scale(1.07)} }
+
+/* logo no orb (repouso) */
+.sc-orb-logo {
+  position:absolute; inset:0; border-radius:50%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; z-index:3;
+  transition:opacity .4s ease;
+}
+.sprite-card:hover .sc-orb-logo { opacity:0; pointer-events:none; }
+.sc-orb-logo img { width:80%; height:80%; object-fit:contain; filter:drop-shadow(0 0 12px rgba(0,255,136,.4)); }
+
+/* lata no orb expandido */
+.sc-orb-bottle {
+  position:absolute; inset:0; border-radius:50%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; z-index:2;
+}
+.sc-orb-bottle img { width:75%; height:75%; object-fit:contain; }
+
+/* info panel */
+.sc-info {
+  position:absolute;
+  left:53%; top:50%; translate:0 -50%;
+  width:200px; z-index:15;
+  display:flex; flex-direction:column; gap:10px;
+  opacity:0; pointer-events:none;
+  transform:translateX(20px);
+  transition:opacity .4s ease .3s, transform .4s ease .3s;
+}
+.sprite-card:hover .sc-info { opacity:1; pointer-events:auto; transform:translateX(0); }
+
+.sc-info-tag {
+  font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:#00ff88; opacity:.7;
+}
+.sc-star-row { display:flex; align-items:center; gap:6px; }
+.sc-star-row span { color:#f5a800; font-size:11px; }
+.sc-star-row em { font-size:9px; color:rgba(240,255,248,.45); font-style:normal; }
+.sc-info-name {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:42px; line-height:1; letter-spacing:.03em;
+  color:#f0fff8;
+}
+.sc-info-name span { color:#00ff88; text-shadow:0 0 20px rgba(0,255,136,.5); }
+.sc-info-desc { font-size:11px; line-height:1.6; color:rgba(240,255,248,.6); }
+.sc-flavor-dots { display:flex; align-items:center; gap:7px; }
+.sc-flavor-dot {
+  width:10px; height:10px; border-radius:50%;
+  background:rgba(0,255,136,.18); border:1.5px solid rgba(0,255,136,.3);
+  cursor:pointer; transition:background .2s,border-color .2s,transform .2s;
+}
+.sc-flavor-dot.active { background:#00ff88; border-color:#00ff88; transform:scale(1.25); box-shadow:0 0 8px rgba(0,255,136,.6); }
+.sc-flavor-label { font-size:9px; color:rgba(240,255,248,.35); letter-spacing:.1em; text-transform:uppercase; }
+.sc-price { font-family:'Bebas Neue',sans-serif; font-size:32px; color:#00ff88; letter-spacing:.05em; text-shadow:0 0 20px rgba(0,255,136,.3); }
+.sc-btn-buy {
+  position:relative; overflow:hidden;
+  padding:11px 22px; width:fit-content;
+  border:1px solid rgba(0,255,136,.38); border-radius:9px;
+  background:rgba(0,255,136,.07); color:#00ff88;
+  font-family:'Space Mono',monospace;
+  font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  cursor:pointer; transition:background .3s,box-shadow .3s,transform .12s;
+}
+.sc-btn-buy:hover { background:rgba(0,255,136,.14); border-color:rgba(0,255,136,.65); box-shadow:0 0 24px rgba(0,255,136,.28); }
+.sc-btn-buy:active { transform:scale(.96); }
+
+/* título da seção */
+.sc-section-header {
+  text-align:center; margin-bottom:32px;
+}
+.sc-section-header h2 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  color:#f0f0f0; letter-spacing:.08em;
+}
+.sc-section-header h2 span { color:#00ff88; }
+.sc-section-header p {
+  font-size:.8rem; color:rgba(240,240,240,.45);
+  margin-top:6px; letter-spacing:.1em; text-transform:uppercase;
+}
+
+/* tilt */
+.sprite-card.sc-tilting { transition:width .75s cubic-bezier(.16,1,.3,1),box-shadow .5s ease; }
+
+@media(max-width:600px){
+  .sprite-card{ width:160px; height:360px; }
+  .sprite-card:hover{ width:calc(100vw - 32px); }
+  .sc-info{ left:46%; width:155px; }
+  .sc-info-name{ font-size:30px; }
+}
+</style>
+
+  
+  <script>
+  // tilt 3D
+  (function(){
+    const card = document.getElementById('spriteCard');
+    let hov = false;
+    card.addEventListener('mouseenter',()=>hov=true);
+    card.addEventListener('mouseleave',()=>{hov=false;card.style.transform='';card.classList.remove('sc-tilting');});
+    card.addEventListener('mousemove',e=>{
+      if(!hov) return;
+      const r=card.getBoundingClientRect();
+      const dx=(e.clientX-r.left-r.width/2)/(r.width/2);
+      const dy=(e.clientY-r.top-r.height/2)/(r.height/2);
+      card.classList.add('sc-tilting');
+      card.style.transform=`rotateX(${-dy*5}deg) rotateY(${dx*5}deg)`;
+    });
+  })();
+  function scFlavor(el){
+    document.querySelectorAll('.sc-flavor-dot').forEach(d=>d.classList.remove('active'));
+    el.classList.add('active');
+  }
+  </script>
+</section>
+
+<div class="flame-strip"></div>
+
+<!-- GRADIENT FADE: faq → contato -->
+<div style="height:80px;background:linear-gradient(to bottom,var(--black-soft),var(--black));pointer-events:none;"></div>
+<!-- CONTATO -->
+<section id="contato">
+  <div class="section-title">Entre em <span>Contato</span></div>
+  <div class="divider"></div>
+  <div class="contato-grid">
+    <div class="contato-info">
+      <div class="info-card">
+        <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+        <div>
+          <h4>WhatsApp</h4>
+          <p>(XX) 9 XXXX-XXXX</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-clock"></i></div>
+        <div>
+          <h4>Horário</h4>
+          <p>11h às 01h – Todos os dias</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon" style="background:var(--yellow)"><i class="fas fa-map-marker-alt" style="color:var(--black)"></i></div>
+        <div>
+          <h4>Área de Entrega</h4>
+          <p>Sua cidade – UF</p>
+        </div>
+      </div>
+      <a href="https://wa.me/55XX999999999?text=Ol%C3%A1!%20Quero%20fazer%20um%20pedido!" target="_blank" class="wpp-btn">
+        <i class="fab fa-whatsapp" style="font-size:1.2rem"></i>
+        Chamar no WhatsApp
+      </a>
+    </div>
+    <div class="form-card">
+      <h3>Envie uma <span style="color:var(--yellow)">Mensagem</span></h3>
+      <div class="form-group">
+        <label>Seu nome</label>
+        <input type="text" id="c-nome" placeholder="Como você se chama?">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp</label>
+        <input type="tel" id="c-tel" placeholder="(83) 9 XXXX-XXXX">
+      </div>
+      <div class="form-group">
+        <label>Assunto</label>
+        <select id="c-assunto">
+          <option>Dúvida sobre pedido</option>
+          <option>Reclamação</option>
+          <option>Sugestão</option>
+          <option>Elogio</option>
+          <option>Outros</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensagem</label>
+        <textarea id="c-msg" placeholder="Escreva sua mensagem aqui..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="enviarContato()"><i class="fab fa-whatsapp" style="margin-right:6px"></i>Enviar via WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;margin-bottom:8px">Seu <span style="color:var(--yellow)">Delivery</span></div>
+      <p>Rápido, quente e sempre na sua porta. Delivery de qualidade até 01h da madrugada, todos os dias.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#cardapio">Cardápio</a></li>
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atendimento</h4>
+      <ul>
+        <li><a href="#">(XX) 9 XXXX-XXXX</a></li>
+        <li><a href="#">WhatsApp 24h*</a></li>
+        <li><a href="#">Seg a Dom: 11h–01h</a></li>
+        <li><a href="#">Sua cidade – UF</a></li>
+      </ul>
+      <div class="hours-badge" style="margin-top:14px">
+        <i class="fas fa-circle" style="font-size:0.5rem;color:#4caf50"></i>
+        Aberto agora!
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 <b>Seu Delivery</b>. Todos os direitos reservados.</span>
+    <span>Feito com ❤️ para Sua cidade – UF</span>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h3>🛒 Seu <span style="color:var(--yellow)">Pedido</span></h3>
+    <button class="close-cart" onclick="closeCart()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty" id="cart-empty">
+      <i class="fas fa-shopping-bag"></i>
+      <p>Seu carrinho está vazio</p>
+      <small style="color:var(--text-muted);font-size:0.75rem">Adicione itens do cardápio!</small>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total do pedido</span>
+      <strong>R$ <span id="cart-total">0,00</span></strong>
+    </div>
+
+    <!-- Step 1: Checkout button -->
+    <div id="step-checkout">
+      <button class="checkout-btn" onclick="showCheckout()">
+        <i class="fas fa-clipboard-list" style="margin-right:6px"></i>Finalizar Pedido
+      </button>
+    </div>
+
+    <!-- Step 2: Checkout form -->
+    <div class="checkout-form" id="step-form">
+      <button class="back-to-cart" onclick="hideCheckout()">← Voltar ao carrinho</button>
+      <div class="form-group">
+        <label>Seu nome completo</label>
+        <input type="text" id="p-nome" placeholder="Nome para o pedido">
+      </div>
+      <div class="form-group">
+        <label>Endereço de entrega</label>
+        <input type="text" id="p-end" placeholder="Rua, nº, bairro">
+      </div>
+      <div class="form-group">
+        <label>Referência do local</label>
+        <input type="text" id="p-ref" placeholder="Perto de / Cor da casa...">
+      </div>
+      <div class="form-group">
+        <label>Forma de pagamento</label>
+        <select id="p-pag">
+          <option value="PIX">PIX</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de Débito">Cartão de Débito</option>
+          <option value="Cartão de Crédito">Cartão de Crédito</option>
+        </select>
+      </div>
+      <button class="finalizar-btn" onclick="finalizarPedido()">
+        <i class="fab fa-whatsapp" style="margin-right:6px"></i>Confirmar via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toast-msg">Item adicionado!</span></div>
+
+ 
+<script>
+/* ============================================================
+   KM DELIVERY – HERO CAROUSEL JS (otimizado, sem duplicação)
+   ============================================================ */
+(function () {
+  'use strict';
+
+  const AUTO_INTERVAL = 5000;
+  const PROGRESS_TICK = 50;
+
+  const slides       = document.querySelectorAll('.hc-slide');
+  const thumbs       = document.querySelectorAll('.hc-thumb');
+  const dots         = document.querySelectorAll('.hc-dot');
+  const btnPrev      = document.getElementById('hcPrev');
+  const btnNext      = document.getElementById('hcNext');
+  const progressFill = document.getElementById('hcProgressFill');
+
+  if (!slides.length) return;
+
+  let current     = 0;
+  let autoTimer   = null;
+  let progTimer   = null;
+  let progValue   = 0;
+  let isAnimating = false;
+
+  function goTo(next) {
+    if (isAnimating || next === current) return;
+    isAnimating = true;
+
+    const prev = current;
+    current = (next + slides.length) % slides.length;
+
+    slides[prev].classList.remove('hc-active');
+    slides[prev].classList.add('hc-prev');
+    pauseVideo(slides[prev]);
+
+    slides[current].classList.add('hc-active');
+    slides[current].classList.remove('hc-prev');
+    loadAndPlayVideo(slides[current]);
+
+    thumbs.forEach((t, i) => {
+      t.classList.toggle('active', i === current);
+      t.style.setProperty('--thumb-progress', '0%');
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+
+    setTimeout(() => {
+      slides[prev].classList.remove('hc-prev');
+      isAnimating = false;
+    }, 950);
+
+    resetProgress();
+  }
+
+  function nextSlide() { goTo(current + 1); }
+  function prevSlide() { goTo(current - 1); }
+
+  function loadAndPlayVideo(slide) {
+    const v = slide.querySelector('.hc-video');
+    if (!v) return;
+    // Carrega o vídeo sob demanda se ainda não foi carregado
+    if (v.preload === 'none' && v.readyState === 0) {
+      v.preload = 'auto';
+      v.load();
+    }
+    v.currentTime = 0;
+    v.play().catch(() => {});
+  }
+
+  function pauseVideo(slide) {
+    const v = slide.querySelector('.hc-video');
+    if (v) v.pause();
+  }
+
+  function startAuto() {
+    stopAuto();
+    resetProgress();
+    autoTimer = setInterval(nextSlide, AUTO_INTERVAL);
+    progTimer = setInterval(() => {
+      progValue += (PROGRESS_TICK / AUTO_INTERVAL) * 100;
+      const pct = Math.min(progValue, 100) + '%';
+      if (progressFill) progressFill.style.width = pct;
+      const activeThumb = thumbs[current];
+      if (activeThumb) activeThumb.style.setProperty('--thumb-progress', pct);
+    }, PROGRESS_TICK);
+  }
+
+  function stopAuto() {
+    clearInterval(autoTimer);
+    clearInterval(progTimer);
+    autoTimer = null;
+    progTimer = null;
+  }
+
+  function resetProgress() {
+    progValue = 0;
+    if (progressFill) progressFill.style.width = '0%';
+    thumbs.forEach(t => t.style.setProperty('--thumb-progress', '0%'));
+  }
+
+  if (btnNext) btnNext.addEventListener('click', () => { nextSlide(); stopAuto(); startAuto(); });
+  if (btnPrev) btnPrev.addEventListener('click', () => { prevSlide(); stopAuto(); startAuto(); });
+
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      goTo(parseInt(thumb.dataset.slide, 10));
+      stopAuto(); startAuto();
+    });
+  });
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      goTo(parseInt(dot.dataset.slide, 10));
+      stopAuto(); startAuto();
+    });
+  });
+
+  let touchStartX = 0;
+  const heroSection = document.querySelector('.hero-section');
+  if (heroSection) {
+    heroSection.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    heroSection.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) < 50) return;
+      diff > 0 ? nextSlide() : prevSlide();
+      stopAuto(); startAuto();
+    }, { passive: true });
+    heroSection.addEventListener('mouseenter', stopAuto);
+    heroSection.addEventListener('mouseleave', startAuto);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { stopAuto(); pauseVideo(slides[current]); }
+    else { loadAndPlayVideo(slides[current]); startAuto(); }
+  });
+
+  function init() {
+    slides.forEach((s, i) => {
+      s.classList.remove('hc-active', 'hc-prev');
+      if (i === 0) { s.classList.add('hc-active'); loadAndPlayVideo(s); }
+      else pauseVideo(s);
+    });
+    thumbs.forEach((t, i) => t.classList.toggle('active', i === 0));
+    dots.forEach((d, i) => d.classList.toggle('active', i === 0));
+    startAuto();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+ <script src="site-js/site.js"></script>
+
+<script>
+// ==================== NAV SCROLL ====================
+window.addEventListener('scroll', function() {
+  var nav = document.querySelector('nav');
+  if (nav) {
+    if (window.scrollY > 60) nav.classList.add('nav-scrolled');
+    else nav.classList.remove('nav-scrolled');
+  }
+});
+</script>
+</body>
+</html>
